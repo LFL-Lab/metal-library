@@ -10,7 +10,7 @@ git clone https://github.com/LFL-Lab/metal-library
 ```
 3. Install dependencies
 ```
-cd metal-post
+cd metal-library
 pip install .
 ```
 
