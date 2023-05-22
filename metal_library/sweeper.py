@@ -1,5 +1,5 @@
-from QubitPresimulated.librarian import QLibrarian
-from QubitPresimulated.sweeper_helperfunctions import extract_QSweep_parameters
+from metal_library.librarian import QLibrarian
+from metal_library.sweeper_helperfunctions import extract_QSweep_parameters
 from qiskit_metal.analyses.simulation import ScatteringImpedanceSim
 from qiskit_metal.analyses.quantization import EPRanalysis
 from qiskit_metal.analyses.quantization import LOManalysis
