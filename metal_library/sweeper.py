@@ -10,8 +10,8 @@ class QSweeper:
     '''
     '''
 
-    def __init__(self, analysis,):
-        self.analysis = analysis
+    def __init__(self, design):
+        self.design = design
         
     def run_sweep(self, component_name: str, parameters: dict, custom_analysis = None, save_path = None, **kwargs):
         """
@@ -22,8 +22,7 @@ class QSweeper:
         * parameters (dict) - A dictionary of options and their corresponding values. 
             The keys are the options (strings), and the values are lists of floats.
         * custom_analysis (func (QAnalysis) -> dict, optional) - Create a custom analyzer to
-            parse data! See self.run_EPRanalysis, self.run_LOManalysis, self.runScatteringImpedanceSim
-            for examples.
+            parse data
         * kwargs - parameters associated w/ QAnalysis.run()
         
         Output:
@@ -46,7 +45,7 @@ class QSweeper:
         self.librarian = QLibrarian()
 
         # Define some useful objects
-        design = self.analysis.sim.design
+        design = self.design
         component = design.components[component_name]
         all_combo_parameters = extract_QSweep_parameters(parameters)
 
@@ -54,14 +53,7 @@ class QSweeper:
         if custom_analysis != None:
             run_analysis = custom_analysis
         else:
-            if (type(self.analysis) == LOManalysis):
-                run_analysis = self.run_LOManlaysis
-            elif (type(self.analysis) == EPRanalysis):
-                run_analysis = self.run_EPRanlaysis
-            elif (type(self.analysis) == ScatteringImpedanceSim):
-                run_analysis = self.run_ScatteringImpedanceSim
-            else:
-                raise ValueError('Analysis type is not currently supported.')
+            raise ValueError('Default analysis not implemented yet. Please add `custom_analysis`')
         
 
         # Get all combinations of the options and values, w/ `tqdm` progress bar
@@ -86,30 +78,7 @@ class QSweeper:
             # Tell me this iteration is finished
             print('Simulated and logged configuration: {}'.format(combo_parameter))
 
-            # Append full result to QSweeper.full_simulations
-            full_QAnalysis = self.analysis
-            self.full_simulations.append(full_QAnalysis)
-
         return self.librarian
-            
-    def run_LOManlaysis(self, data_name, **kwargs):
-        all_data = self.analysis.get_data(data_name)
-        return all_data
-    
-    def run_EPRanlaysis(self, data_name, **kwargs):
-        try:
-            self.analysis.sim.run(**kwargs)
-            self.analysis.run_epr()
-        except:
-            pass
-        
-        results = self.analysis.sim.renderer.epr_quantum_analysis.results['0']
-    
-        return results
-    
-    def run_ScatteringImpedanceSim(self, data_name, **kwargs):
-        all_data = self.analysis.get_data(data_name)
-        return all_data
 
     def update_qcomponent(self, qcomponent_options: dict, dictionary):
         '''

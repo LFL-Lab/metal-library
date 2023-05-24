@@ -51,7 +51,7 @@ class QLibrarian:
 
     #### Section 2: Gathering data 
     # Append qcomponent.options to self.qoptions
-    def from_dict(self, dictionary, target_df='qoption'):
+    def from_dict(self, dictionary, target_df):
         '''
         Get data in the format of QComponent.options
         Append it to a pandas DataFrame
@@ -67,11 +67,14 @@ class QLibrarian:
         Columns are named after the keys of the dict. For nested dicts, keys are separated by `.`
         Entries below each column are associated w/ the deepest value of the nested dict.
         '''
-        keys, values = self.extract_keysvalues(dictionary)
+        
         if (target_df == 'qoption'):
+            keys, values = self.extract_keysvalues(dictionary)
             self.qoptions = self.qoptions.append(dict(zip(keys, values)), ignore_index=True)
+        elif (target_df == 'simulation'):
+            self.simulations = self.simulations.append(dictionary, ignore_index=True)
         else:
-            self.simulations = self.simulations.append(dict(zip(keys, values)), ignore_index=True)
+            raise ValueError(f'target_df must be one of the following: {self.supported_datatypes}')
         
     def extract_keysvalues(self, dictionary, parent_key=''):
         '''
@@ -206,7 +209,7 @@ class QLibrarian:
             now = datetime.datetime.now()
             date_string = now.strftime("%Y-%m-%d")
     
-            filepath = 'testing_{date_string}.csv'
+            filepath = f'testing_{date_string}.csv'
         
         # Combine the two DataFrames and add an empty column between them
         combined_df = pd.concat([qoption_data, pd.DataFrame(columns=['__SPLITTER__']), simulation_data], axis=1)
