@@ -69,14 +69,15 @@ class QLibrarian:
         '''
         
         if (target_df == 'qoption'):
-            keys, values = self.extract_keysvalues(dictionary)
+            keys, values = QLibrarian.extract_keysvalues(dictionary)
             self.qoptions = self.qoptions.append(dict(zip(keys, values)), ignore_index=True)
         elif (target_df == 'simulation'):
             self.simulations = self.simulations.append(dictionary, ignore_index=True)
         else:
             raise ValueError(f'target_df must be one of the following: {self.supported_datatypes}')
-        
-    def extract_keysvalues(self, dictionary, parent_key=''):
+    
+    @staticmethod
+    def extract_keysvalues(dictionary, parent_key=''):
         '''
         Helper method for self.from_dict
         Not used for front end.
@@ -94,7 +95,7 @@ class QLibrarian:
         for key, value in dictionary.items():
             new_key = parent_key + '.' + key if parent_key else key
             if isinstance(value, dict):
-                nested_keys, nested_values = self.extract_keysvalues(value, new_key)
+                nested_keys, nested_values = QLibrarian.extract_keysvalues(value, new_key)
                 keys.extend(nested_keys)
                 values.extend(nested_values)
             else:

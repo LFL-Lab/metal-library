@@ -13,7 +13,7 @@ class QSweeper:
     def __init__(self, design):
         self.design = design
         
-    def run_sweep(self, component_name: str, parameters: dict, custom_analysis = None, save_path = None, **kwargs):
+    def run_single_component_sweep(self, component_name: str, parameters: dict, custom_analysis = None, save_path = None, **kwargs):
         """
         Runs self.analysis.run_sweep() for all combinations of the options and values in the `parameters` dictionary.
 
