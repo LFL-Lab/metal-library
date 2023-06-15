@@ -59,7 +59,8 @@ class QLibrarian:
         Input: 
         * dictionary
         * target_df (string) - 
-            - 'qoption'
+            - 'single_qoption'
+            - 'multi_qoption'
             - 'simulation'
 
         Output:
@@ -68,9 +69,11 @@ class QLibrarian:
         Entries below each column are associated w/ the deepest value of the nested dict.
         '''
         
-        if (target_df == 'qoption'):
+        if (target_df == 'single_qoption'):
             keys, values = QLibrarian.extract_keysvalues(dictionary)
             self.qoptions = self.qoptions.append(dict(zip(keys, values)), ignore_index=True)
+        elif (target_df == 'multi_qoption'):
+            self.qoptions = self.qoptions.append(dictionary)
         elif (target_df == 'simulation'):
             self.simulations = self.simulations.append(dictionary, ignore_index=True)
         else:

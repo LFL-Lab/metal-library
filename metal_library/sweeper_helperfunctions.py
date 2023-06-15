@@ -29,7 +29,7 @@ TODO: There's definitely a more elegant way of doing this
     I'm just not sure how to do it at the moment.
 '''
 
-def extract_QSweep_parameters(parameters: dict):
+def extract_QSweep_parameters(parameters: dict) -> list[dict]:
     '''
     Input:
     * parameters (dict) - nested dictionary with a list
