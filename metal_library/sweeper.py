@@ -13,7 +13,13 @@ class QSweeper:
     def __init__(self, design):
         self.design = design
         
-    def run_single_component_sweep(self, component_name: str, parameters: dict, custom_analysis = None, save_path = None, **kwargs):
+    def run_single_component_sweep(self, 
+                                   component_name: str, 
+                                   parameters: dict, 
+                                   custom_analysis = None, 
+                                   parameters_slice: slice = None,
+                                   save_path: str = None, 
+                                   **kwargs):
         """
         Runs self.analysis.run_sweep() for all combinations of the options and values in the `parameters` dictionary.
 
@@ -21,8 +27,11 @@ class QSweeper:
         * component_name (str) - The name of the component to run the sweep on.
         * parameters (dict) - A dictionary of options and their corresponding values. 
             The keys are the options (strings), and the values are lists of floats.
-        * custom_analysis (func (QAnalysis) -> dict, optional) - Create a custom analyzer to
-            parse data
+        * custom_analysis (func (QAnalysis) -> dict, optional) - Create a custom analyzer to parse data
+        * parameters_slice (slice) - If sweep fails, tell it where to start again from
+            Example:
+            slice(40,)
+        * save_path (str, optional) - save data path associated from sweep
         * kwargs - parameters associated w/ QAnalysis.run()
         
         Output:
@@ -48,6 +57,10 @@ class QSweeper:
         design = self.design
         component = design.components[component_name]
         all_combo_parameters = extract_QSweep_parameters(parameters)
+
+        # Slice
+        if (parameters_slice != None):
+            all_combo_parameters = all_combo_parameters[parameters_slice]
 
         # Select a simulator type
         if custom_analysis != None:
@@ -80,6 +93,38 @@ class QSweeper:
 
         return self.librarian
 
+    def run_multi_component_sweep(self, 
+                                  component_names: list[str],
+                                  parameters: list[dict],
+                                  custom_analysis = None, 
+                                  save_path: str = None, 
+                                  **kwargs):
+        """
+        Runs self.analysis.run_sweep() for all combinations of the options and values in the `parameters` dictionary.
+
+        Inputs:
+        * component_name (str) - The name of the component to run the sweep on.
+        * parameters (dict) - A dictionary of options and their corresponding values. 
+            The keys are the options (strings), and the values are lists of floats.
+        * custom_analysis (func (QAnalysis) -> dict, optional) - Create a custom analyzer to
+            parse data
+        * kwargs - parameters associated w/ QAnalysis.run()
+        
+        Output:
+        * Librarian (QLibrarian)- 
+
+        Example:
+        If `parameters = {'cross_length': [1, 2], 'cross_gap': [4, 5, 6]}`, then this method will call 
+        `self.analysis.()` 6 times with the following arguments:
+        1. cross_length: 1 cross_gap: 5
+        2. cross_length: 1 cross_gap: 4
+        3. cross_length: 1 cross_gap: 6
+        4. cross_length: 2 cross_gap: 4
+        5. cross_length: 2 cross_gap: 5
+        6. cross_length: 2 cross_gap: 6
+        """
+
+        
     def update_qcomponent(self, qcomponent_options: dict, dictionary):
         '''
         Given a qcomponent.options dictionary,
