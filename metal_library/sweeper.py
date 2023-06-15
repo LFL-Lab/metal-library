@@ -28,7 +28,7 @@ class QSweeper:
         * parameters (dict) - A dictionary of options and their corresponding values. 
             The keys are the options (strings), and the values are lists of floats.
         * custom_analysis (func (QAnalysis) -> dict, optional) - Create a custom analyzer to parse data
-        * parameters_slice (slice) - If sweep fails, tell it where to start again from
+        * parameters_slice (slice, optional) - If sweep fails, tell it where to start again from. Defaults to all.
             Example:
             slice(40,)
         * save_path (str, optional) - save data path associated from sweep
@@ -105,7 +105,7 @@ class QSweeper:
         * parameters (list[dict]) - A dictionary of options and their corresponding values. 
             The keys are the options (strings), and the values are lists of floats.
         * custom_analysis (func (QAnalysis) -> dict, optional) - Create a custom analyzer to parse data
-        * parameters_slice (slice) - If sweep fails, tell it where to start again from
+        * parameters_slice (slice, optional) - If sweep fails, tell it where to start again from. Defaults to all.
             Example:
             slice(40,)
         * save_path (str, optional) - save data path associated from sweep
