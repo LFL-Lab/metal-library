@@ -129,7 +129,7 @@ class QSweeper:
 
         # Define some useful objects
         design = self.design
-        all_parameters = dict(zip(components_name, parameters))
+        all_parameters = dict(zip(components_names, parameters))
         all_combo_parameters += extract_QSweep_parameters(all_parameters)
 
         # Slice
