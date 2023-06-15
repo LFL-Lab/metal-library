@@ -73,7 +73,7 @@ class QLibrarian:
             keys, values = QLibrarian.extract_keysvalues(dictionary)
             self.qoptions = self.qoptions.append(dict(zip(keys, values)), ignore_index=True)
         elif (target_df == 'multi_qoption'):
-            self.qoptions = self.qoptions.append(dictionary)
+            self.qoptions = self.qoptions.append(dictionary, ignore_index=True)
         elif (target_df == 'simulation'):
             self.simulations = self.simulations.append(dictionary, ignore_index=True)
         else:
