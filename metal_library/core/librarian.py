@@ -15,7 +15,7 @@ class QLibrarian:
     '''
     
     
-    supported_datatypes = ['qoptions', 'simulations', 'analysis_setup']
+    supported_datatypes = ['qoptions', 'multi_qoption', 'analysis_setup']
     default_save_directory = 'QubitPresimulated/draft_presimulated/'
 
     def __init__(self):

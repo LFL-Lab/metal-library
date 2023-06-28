@@ -1,0 +1,42 @@
+{
+    "qiskit-metal-version": "0.1.5",
+    "qiskit-metal-component-name": "TransmonCross",
+    "component-type": "Qubit",
+    "characteristics": {
+        "QubitOnly": [
+            "Qubit_Frequency_GHz",
+            "Qubit_Anharmonicity_MHz"
+        ],
+        "QubitCavity": [
+            "Qubit_Frequency_GHz",
+            "Qubit_Anharmonicity_MHz",
+            "Cavity_Frequency_MHz",
+            "Coupling_Strength_MHz"
+        ],
+        "QubitDriveline": [
+            "Qubit_Frequency_GHz",
+            "Qubit_Anharmonicity_MHz",
+            "Resonator_Decay_Rate_MHz"
+        ]
+    },
+    "contributors" : {
+        "experiment": null,
+        "simulation": {
+            "author": [
+                {
+                    "name": ["Clark Miyamoto", "Andre Kuo"],
+                    "pi": ["Eli Levenson-Falk"],
+                    "contribution": [["QubitOnly", 0, 727],
+                                     ["QubitCavity", null, null],
+                                     ["QubitDriveline", null, null]]
+                },
+                {
+                    "name": ["your", "names"],
+                    "pi": ["your", "pi(s)"],
+                    "contribution": [["name of csv", "first line in csv", "last line"],
+                                      "contribution in other csv(s)", "go", "below"]
+                }
+            ]
+        }
+    }
+}

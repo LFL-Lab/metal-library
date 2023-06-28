@@ -1,1 +1,0 @@
-# Copyright Levenson-Falk Labs 2023
