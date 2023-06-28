@@ -1,8 +1,5 @@
-from metal_library.librarian import QLibrarian
-from metal_library.sweeper_helperfunctions import extract_QSweep_parameters
-from qiskit_metal.analyses.simulation import ScatteringImpedanceSim
-from qiskit_metal.analyses.quantization import EPRanalysis
-from qiskit_metal.analyses.quantization import LOManalysis
+from metal_library.core.librarian import QLibrarian
+from metal_library.core.sweeper_helperfunctions import extract_QSweep_parameters
 from tqdm import tqdm # creates cute progress bar
 
 
