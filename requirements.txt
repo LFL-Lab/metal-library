@@ -2,3 +2,5 @@ pandas
 numpy
 tqdm
 qiskit-metal
+tabulate
+os

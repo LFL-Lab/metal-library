@@ -1,40 +1,111 @@
 {
     "qiskit-metal-version": "0.1.5",
     "qiskit-metal-component-path": "qiskit_metal.qlibrary.qubits.transmon_cross.TransmonCross",
-    "component-type": "Qubit",
-    "characteristics": {
-        "QubitOnly": [
-            "Qubit_Frequency_GHz",
-            "Qubit_Anharmonicity_MHz"
-        ],
-        "QubitCavity": [
-            "Qubit_Frequency_GHz",
-            "Qubit_Anharmonicity_MHz",
-            "Cavity_Frequency_MHz",
-            "Coupling_Strength_MHz"
-        ],
-        "QubitDriveline": [
-            "Qubit_Frequency_GHz",
-            "Qubit_Anharmonicity_MHz",
-            "Resonator_Decay_Rate_MHz"
+    "metal-library-component-path": null,
+    "component-types": {
+       "QubitOnly": {
+        "characteristics": [
+            {
+                "column_name": "Qubit_Frequency_GHz",
+                "blurb": "Qubit 01 Transition Freq (Linear GHz)",
+                "units": "GHz",
+                "latex_symbol": "f_{q,01}"
+            },
+            {
+                "column_name": "Qubit_Anharmonicity_MHz",
+                "blurb": "Qubit Anharmonicity (Linear MHz)",
+                "units": "MHz",
+                "latex_symbol": "\\alpha_{q}"
+            }
         ]
+       },
+       "QubitCavity": {
+        "characteristics": [
+            {
+                "column_name": "Qubit_Frequency_GHz",
+                "blurb": "Qubit 01 Transition Freq (Linear GHz)",
+                "units": "GHz",
+                "latex_symbol": "f_{q,01}"
+            },
+            {
+                "column_name": "Qubit_Anharmonicity_MHz",
+                "blurb": "Qubit Anharmonicity (Linear MHz)",
+                "units": "MHz",
+                "latex_symbol": "\\alpha_{q}"
+            },
+            {
+                "column_name": "Cavity_Frequency_GHz",
+                "blurb": "Cavity Resonant Freq (Linear MHz)",
+                "units": "GHz",
+                "latex_symbol": "\f_{c}"
+            },
+            {
+                "column_name": "Coupling_Strength_MHz",
+                "blurb": "Coupling between qubit and cavity (Linear MHz)",
+                "units": "MHz",
+                "latex_symbol": "g_{q,c}"
+            }
+        ]
+       }
     },
     "contributors" : {
-        "experiment": null,
-        "simulation": {
-            "author": [
+        "experiment": {
+            "authors": [
                 {
                     "name": ["Clark Miyamoto", "Andre Kuo"],
                     "pi": ["Eli Levenson-Falk"],
-                    "contribution": [["QubitOnly", 0, 727],
-                                     ["QubitCavity", null, null],
-                                     ["QubitDriveline", null, null]]
+                    "institution": ["University of Southern California, Physics Department"],
+                    "contribution": [
+                        null
+                    ]
+                }
+            ]
+        },
+        "simulation": {
+            "authors": [
+                {
+                    "name": ["Clark Miyamoto", "Andre Kuo"],
+                    "pi": ["Eli Levenson-Falk"],
+                    "institution": ["University of Southern California, Physics Department"],
+                    "contribution": {
+                        "QubitOnly": {
+                            "csv_startline": 0,
+                            "csv_endline":   729,
+                            "method_path":   null
+                            },
+                        "QubitCavity": {
+                            "csv_startline": null,
+                            "csv_endline":   null,
+                            "method_path":   null
+                        },
+                        "QubitFeedline": {
+                            "csv_startline": null,
+                            "csv_endline":   null,
+                            "method_path":   null
+                        }    
+                    }
                 },
                 {
                     "name": ["your", "names"],
-                    "pi": ["your", "pi(s)"],
-                    "contribution": [["name of csv", "first line in csv", "last line"],
-                                      "contribution in other csv(s)", "go", "below"]
+                    "pi": ["your PI", "(s)"],
+                    "institution": ["your professional afiliation"],
+                    "contribution": {
+                        "QubitOnly": {
+                            "csv_startline": 0,
+                            "csv_endline":   729,
+                            "method_path":   null
+                            },
+                        "QubitCavity": {
+                            "csv_startline": null,
+                            "csv_endline":   null,
+                            "method_path":   null
+                        },
+                        "QubitFeedline": {
+                            "csv_startline": null,
+                            "csv_endline":   null,
+                            "method_path":   null
+                        }    
+                    }
                 }
             ]
         }
