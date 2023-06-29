@@ -25,5 +25,4 @@ git pull
 pip install --upgrade .
 ```
 
-# How to Use
- 
+# How to Use 
