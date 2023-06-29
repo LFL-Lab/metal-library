@@ -1,5 +1,5 @@
 # metal-library
-Library of pre-simulated superconducting quantum components built on Qiskit Metal.
+`metal-library` is a powerful framework made to expedite the design and simulation phase of a superconducting quantum devices. Its primary objective is to reduce the time spent by design engineers by providing an initial estimation of a components characteristics. We do this by comparing a component's geometry to experimentally verified quantities of qubits and cavities.
 
 
 # Installation
