@@ -1,0 +1,21 @@
+{
+    "qiskit-metal-version": "0.1.5",
+    "qiskit-metal-component-path": "qiskit_metal.qlibrary.qubits.transmon_pocket.TransmonPocket",
+    "component-type": "Qubit",
+    "characteristics": {
+        "nan":"nan"
+    },
+    "contributors" : {
+        "experiment": null,
+        "simulation": {
+            "author": [
+                {
+                    "name": ["your", "names"],
+                    "pi": ["your", "pi(s)"],
+                    "contribution": [["name of csv", "first line in csv", "last line"],
+                                      "contribution in other csv(s)", "go", "below"]
+                }
+            ]
+        }
+    }
+}

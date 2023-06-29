@@ -1,6 +1,6 @@
 {
     "qiskit-metal-version": "0.1.5",
-    "qiskit-metal-component-name": "TransmonCross",
+    "qiskit-metal-component-name": "qiskit_metal.qlibrary.qubits.transmon_cross.TransmonCross",
     "component-type": "Qubit",
     "characteristics": {
         "QubitOnly": [
