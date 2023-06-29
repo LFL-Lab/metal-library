@@ -8,39 +8,35 @@ We appreciate your interest in contributing to `metal_library`! To help maintain
 
 Please take a moment to go through them and ensure that your contributions meet these standards. 
 
-## Contributing to the Library of Experimental Data <a name="experimental-data"></a>
+## Contributing Experimental Data <a name="experimental-data"></a>
 
-When contributing experimental data, there are certain requirements:
+When contributing experimental data, please provide the following:
 
-- **Mandatory**:
-  - Qubit Spectroscopy and Resonator Spectroscopy data.
-  - At least one form of coupling measurement.
-  - A statement confirming that the design they're contributing corresponds exactly to the device measured. This should include the Name, PI, and Institution.
-  - A statement from PI confirming permission to publish this data.
+**Mandatory**:
+- Associated design in `qiskit-metal` or `.gds` format
+- Qubit spectroscopy
+- Resonator spectroscopy
+- At least one form of coupling measurement
+    - Punchout
+    - Dispersive shift
+    - Vaccum Rabi splitting
+- A statement confirming that the design you have contributed corresponds exactly to the device measured.
+- A statement from PI confirming permission to publish this data.
   
-- **Optional, but highly encouraged**:
-  - Punchout.
-  - Dispersive Shift Measurement or Vacuum Rabi Splitting.
-  - A linked paper or pre-print of the measured device.
+**Optional, but highly encouraged**:
+- Link to paper or pre-print of the contributed device.
 
-By following these guidelines, you help us maintain the quality and integrity of the experimental data library.
+If you would like to expand the library 
 
-## Contributing to the Library of Simulation Data <a name="simulation-data"></a>
+## Contributing Simulation Data <a name="simulation-data"></a>
 
 When contributing simulation data, we ask the following:
 
-- **Mandatory**:
-  - Simulation data must have clear documentation explaining the method of simulation and parameters used.
-  - Simulation results must be reproducible with the given parameters.
-  - Simulation code (if applicable), should be in Python, using standard libraries such as Qiskit, Cirq, etc.
-  - Any qubit designs used for simulation must be thoroughly described and, if possible, provide a schematic representation.
-  - Data must be in a commonly used format (.csv, .json, .xlsx etc.).
+**Mandatory**:
+- Simulation methodology is contained in a single `.ipynb` file
+- Simulation data must have clear documentation explaining the method of simulation and parameters used.
+- Simulation results must be reproducible with the given parameters.
 
-- **Optional, but highly encouraged**:
-  - An associated paper or pre-print discussing the simulation data.
-  - Scripts or notebooks (Jupyter notebooks, for example) that can replicate the simulation data.
-
-These guidelines help ensure that the simulation data can be used effectively and reproduced by others in the community.
 
 ## Contributing to the Codebase <a name="codebase"></a>
 
@@ -57,4 +53,5 @@ If you wish to contribute to the codebase, please follow these guidelines:
   - Bug fixes with detailed explanation of the issue and the fix.
   - New features that improve the functionality of the library.
 
-We thank you in advance for following these guidelines. Your contributions help make `metal_library` a better resource for everyone in the community!
+
+We thank you in advance for following these guidelines. Your contributions help make `metal_library` a better resource for everyone in the experimental quantum computing ommunity!
