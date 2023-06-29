@@ -4,6 +4,7 @@
     "metal-library-component-path": null,
     "component-types": {
        "QubitOnly": {
+        "blurb": "Qubit only",
         "characteristics": [
             {
                 "column_name": "Qubit_Frequency_GHz",
@@ -20,6 +21,7 @@
         ]
        },
        "QubitCavity": {
+        "blurb": "Qubit capacitvely coupled to a readout cavity.",
         "characteristics": [
             {
                 "column_name": "Qubit_Frequency_GHz",
@@ -44,6 +46,29 @@
                 "blurb": "Coupling between qubit and cavity (Linear MHz)",
                 "units": "MHz",
                 "latex_symbol": "g_{q,c}"
+            }
+        ]
+       },
+       "QubitFeedline": {
+        "blurb": "Qubit capacitvely coupled to a drive line.",
+        "characteristics": [
+            {
+                "column_name": "Qubit_Frequency_GHz",
+                "blurb": "Qubit 01 Transition Freq (Linear GHz)",
+                "units": "GHz",
+                "latex_symbol": "f_{q,01}"
+            },
+            {
+                "column_name": "Qubit_Anharmonicity_MHz",
+                "blurb": "Qubit Anharmonicity (Linear MHz)",
+                "units": "MHz",
+                "latex_symbol": "\\alpha_{q}"
+            },
+            {
+                "column_name": "Feedline_Decay_Rate_MHz",
+                "blurb": "Feedline limited T1 Decay Rate (linear MHz)",
+                "units": "MHz",
+                "latex_symbol": "\\kappa"
             }
         ]
        }
