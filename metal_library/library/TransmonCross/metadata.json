@@ -49,7 +49,7 @@
             }
         ]
        },
-       "QubitFeedline": {
+       "QubitDriveline": {
         "blurb": "Qubit capacitvely coupled to a drive line.",
         "characteristics": [
             {
@@ -65,7 +65,7 @@
                 "latex_symbol": "\\alpha_{q}"
             },
             {
-                "column_name": "Feedline_Decay_Rate_MHz",
+                "column_name": "Driveline_Decay_Rate_MHz",
                 "blurb": "Feedline limited T1 Decay Rate (linear MHz)",
                 "units": "MHz",
                 "latex_symbol": "\\kappa"

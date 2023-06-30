@@ -6,6 +6,9 @@ import metal_library
 
 
 class Reader:
+    """
+    Designed to parse data from `metal_library.library`
+    """
 
     def __init__(self,
                  component_name: str,
@@ -21,8 +24,10 @@ class Reader:
                 It defaults to "metal_library/library"
         """
         self.component_name = component_name
-
-        self.path = os.path.join(metal_library.__library_path__, component_name)
+        if (library_path == None):
+            self.path = os.path.join(metal_library.__library_path__, component_name)
+        else:
+            self.path = library_path
 
         # Read metadata.json metadata
         self.metadata_path = os.path.join(self.path, "metadata.json")
@@ -113,7 +118,21 @@ class Reader:
             print(tabluate_data)
         
         return component_characteristics
-
     
+    def read_library_to_df(self, component_type: str) -> pd.DataFrame:
+        """
+        Reads component in `metal_library.library.component_name.component_type.csv`
 
-    
+        Args:
+            component_type (str): Type of component. Choose from `self.component_types`.
+        
+        Returns:
+            df (pd.DataFrame): 
+        """
+        csv_file_name = str(component_type) + ".csv"
+        component_type_path = os.path.join(self.path, "simulation", csv_file_name)
+        df = pd.read_csv(component_type_path)
+
+        self.component_type_df = df
+
+        return df
