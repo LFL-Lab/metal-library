@@ -30,7 +30,7 @@ class Selector:
         """
         if not (hasattr(reader.library, 'geometry') and hasattr(reader.library, 'characteristic')):
             raise AttributeError('`Reader` must have `Reader.library` created. Run `Reader.read_library` to properly load.')
-        if self.component_type not in self.__supported_component_types__:
+        if reader.library.component_type not in self.__supported_component_types__:
             raise AttributeError(f"`reader.component_type` not current supported. Must choose from {self.__supported_component_types__}")
         self.component_type = reader.library.component_type
         self.geometry = reader.library.geometry
