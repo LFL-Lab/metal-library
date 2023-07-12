@@ -2,8 +2,7 @@ from metal_library.core.reader import Reader
 
 class Interpreter:
     """
-    Prepares data from reader for use by 
-    `metal_library.core.selector.Selector`
+    Prepares data from reader for use by `metal_library.core.selector.Selector`.
 
     Supported reader classes
         Reader: used to interface w/ metal_library.library format
@@ -30,9 +29,9 @@ class Interpreter:
             reader (Reader)
         """
         if not hasattr(reader, 'component_type_df'):
-            raise AttributeError('`Reader` must have `Reader.component_type_df` created. Run `Reader.read_library_to_df` to properly load.')
-        
-        
+            raise AttributeError('`Reader` must have `Reader.library` created. Run `Reader.read_library` to properly load.')
+        self.geometry = reader.library.geometry
+        self.characteristic = reader.library.characteristic
         
 
         

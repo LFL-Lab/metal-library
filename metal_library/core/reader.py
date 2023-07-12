@@ -2,7 +2,9 @@ import pandas as pd
 import os
 import json
 from tabulate import tabulate
+
 import metal_library
+from metal_library import Dict
 
 
 class Reader:
@@ -33,23 +35,15 @@ class Reader:
         self.metadata_path = os.path.join(self.path, "metadata.json")
         with open(self.metadata_path, 'r') as file:
             self.metadata = json.load(file)
+
+        # Library data
+        self.library = Dict()
     
     @property
     def simulation_contributors(self) -> list[str]:
         """List of all people who contributed to simulation data"""
 
         all_author_data = self.metadata["contributors"]["simulation"]["authors"]
-        simulation_contributors = []
-        for author in all_author_data:
-            simulation_contributors += author["name"]
-        return list(set(simulation_contributors))
-        
-    
-    @property
-    def experiment_contributors(self) -> list[str]:
-        """List of all people who contributed to experimental data"""
-
-        passall_author_data = self.metadata["contributors"]["experiment"]["authors"]
         simulation_contributors = []
         for author in all_author_data:
             simulation_contributors += author["name"]
@@ -119,9 +113,10 @@ class Reader:
         
         return component_characteristics
     
-    def read_library_to_df(self, component_type: str) -> pd.DataFrame:
+    def read_library(self, component_type: str) -> pd.DataFrame:
         """
-        Reads component in `metal_library.library.component_name.component_type.csv`
+        Reads component in `metal_library.library.component_name.component_type.csv`.
+
 
         Args:
             component_type (str): Type of component. Choose from `self.component_types`.
@@ -130,9 +125,13 @@ class Reader:
             df (pd.DataFrame): 
         """
         csv_file_name = str(component_type) + ".csv"
-        component_type_path = os.path.join(self.path, "simulation", csv_file_name)
+        component_type_path = os.path.join(self.path, csv_file_name)
         df = pd.read_csv(component_type_path)
 
-        self.component_type_df = df
-
-        return df
+        
+        # Split the combined DataFrame into the two separate DataFrames
+        try:
+            self.library.geometry = df.iloc[:, :df.columns.get_loc('__SPLITTER__')]
+            self.library.characteristic = df.iloc[:, df.columns.get_loc('__SPLITTER__')+1:]
+        except KeyError:
+            raise KeyError("""ERROR: There are no columns in your `.csv`. This error probably came from using QLibrarian.append_csv() to make a new file. Data won't be formatted properly. """)
