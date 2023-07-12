@@ -6,8 +6,11 @@ from metal_library.core.sweeper_helperfunctions import create_dict_list
 class Selector:
 
     __supported_metrics__ = ['Euclidian', 'Manhattan', 'Chebyshev']
+    __supported_component_types__ = ['QubitOnly']
 
     def __init__(self, reader):
+
+        # Will be overwritten by `self.parseReader`
         self.component_type = None
         self.geometry = None
         self.characteristic = None
@@ -27,6 +30,8 @@ class Selector:
         """
         if not (hasattr(reader.library, 'geometry') and hasattr(reader.library, 'characteristic')):
             raise AttributeError('`Reader` must have `Reader.library` created. Run `Reader.read_library` to properly load.')
+        if self.component_type not in self.__supported_component_types__:
+            raise AttributeError(f"`reader.component_type` not current supported. Must choose from {self.__supported_component_types__}")
         self.component_type = reader.library.component_type
         self.geometry = reader.library.geometry
         self.characteristic = reader.library.characteristic
@@ -68,7 +73,10 @@ class Selector:
 
         indexes_smallest = find_index(target_params=target_params, num_top=num_top)
 
-        best_geometries = [self.get_geometry_from_index(index=index) for index in indexes_smallest]
+        if (self.component_type == 'QubitOnly'):
+            get_geom = self.get_geometry_from_index
+
+        best_geometries = [get_geom(index=index) for index in indexes_smallest]
 
         if display:
             best_match = best_geometries[0]
