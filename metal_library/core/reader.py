@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 import os
 import json
 from tabulate import tabulate
@@ -52,17 +53,24 @@ class Reader:
     @property
     def component_types(self) -> list[str]:
         """Types of component combinations"""
+        types_of_setups = self._get_component_types()
+        blurbs = [metadata['blurb'] for _, metadata in self.metadata["component-types"].items()]
+
+        print(tabulate(np.array([types_of_setups,blurbs]).T,
+                       headers=['Supported Component Type', 'Blurb'], 
+                       tablefmt="fancy_grid"))
+
+        return types_of_setups
+
+    def _get_component_types(self) -> list[str]:
+        """Types of component combinations, used in `self.component_types`."""
         types_of_setups = []
         blurbs = []
         for component_type_name, metadata in self.metadata["component-types"].items():
             types_of_setups.append(component_type_name)
-            blurbs.append(metadata['blurb'])
-
-        print(tabulate([types_of_setups, blurbs],
-                       headers="firstrow", 
-                       tablefmt="fancy_grid"))
-
+        
         return types_of_setups
+
 
     def get_characteristic_info(self, 
                                 component_type,
@@ -124,6 +132,8 @@ class Reader:
         Returns:
             df (pd.DataFrame): 
         """
+        if component_type not in self._get_component_types():
+            raise ValueError(f'`component_type` must be from the following: {self._get_component_types()}')
         csv_file_name = str(component_type) + ".csv"
         component_type_path = os.path.join(self.path, csv_file_name)
         df = pd.read_csv(component_type_path)
@@ -131,6 +141,7 @@ class Reader:
         
         # Split the combined DataFrame into the two separate DataFrames
         try:
+            self.library.component_type = component_type
             self.library.geometry = df.iloc[:, :df.columns.get_loc('__SPLITTER__')]
             self.library.characteristic = df.iloc[:, df.columns.get_loc('__SPLITTER__')+1:]
         except KeyError:
