@@ -1,0 +1,54 @@
+0.0um,0.0um,0.0,main,1,0,185um,4um,10um,5.1um,40um,10um,180,30um,185um,29um,10nH,0,0,7e-06,10nH,0,0,7e-06,my_other_junction,1e-08,0,1.0471e-08,0,,3067.350699811647,83.47171810787296,"{'project_info': {'pinfo': design_name         Qubit_Sabrina_design
+project_name          Qubit_Sabrina_proj
+project_path    D:/lfl/Documents/Ansoft/
+setup_name                 TransmonSetup
+dtype: object, 'dissip': dielectrics_bulk                             None
+dielectric_surfaces    [layer_3_datatype_0_plane]
+resistive_surfaces                           None
+seams                                        None
+dtype: object, 'options': Series([], dtype: float64), 'junctions':                                j0
+Cj_variable                  Cj_0
+Lj_variable                  Lj_0
+length                     0.0001
+line             JJ_Lj_1_rect_jj_
+rect         JJ_rect_Lj_1_rect_jj, 'ports': Empty DataFrame
+Columns: []
+Index: []}, 'results': {'0': {'Pm':          j0
+0  0.987043, 'Pm_cap':          j0
+0  0.008087, 'Sm':    s_j0
+0     1, 'Om':                  0
+freq_GHz  3.148037, 'sols':             U_H           U_E
+0  2.593555e-27  5.404718e-25, 'Qm_coupling': Empty DataFrame
+Columns: []
+Index: [0], 'Ljs': j0    1.047100e-08
+dtype: float64, 'Cjs': j0    2.000000e-15
+dtype: float64, 'Qs': 0    inf
+dtype: float64, 'freqs_hfss_GHz': 0    3.148037
+dtype: float64, 'hfss_variables': _Cj_0         0fF
+_Lj_0    10.471nH
+dtype: object, 'modes': range(0, 1), 'I_peak': 0    0    7.166773e-09
+dtype: float64
+dtype: object, 'V_peak': 0    0    0.000001
+dtype: float64
+dtype: object, 'ansys_energies': {0: {'U_J_inds': {'j0': 2.6890904119687378e-25}, 'U_J_caps': {'j0': 2.203246450575972e-27}, 'U_H': 1.29677738811131e-27, 'U_E': 2.702358920341325e-25, 'U_tot_ind': 2.7020581858498507e-25, 'U_tot_cap': 2.7243913848470843e-25, 'U_norm': 2.7243913848470843e-25, 'U_diff': 0.004115619007653533}}, 'mesh':                         Unnamed: 0  Num Tets    Min edge length    \
+0        layer_1_datatype_0_plane          313           0.005657   
+1        layer_3_datatype_0_plane          342           0.143695   
+2                      vacuum_box          844           0.007212   
+3                  cross_transmon           94           0.042426   
+4  readout_connector_arm_transmon           81           0.011225   
+
+   Max edge length    RMS edge length    Min tet vol    Max tet vol    \
+0           0.496101           0.254352   2.666670e-09   4.134170e-05   
+1           0.895209           0.394365   4.308350e-07   2.036920e-02   
+2           1.358550           0.341637   1.966670e-09   3.452860e-02   
+3           0.118853           0.088098   1.500000e-07   8.500000e-07   
+4           0.185273           0.098369   1.666670e-08   6.166670e-07   
+
+   Mean tet vol    Std Devn (vol)    
+0    5.383930e-06      7.135290e-06  
+1    2.019210e-03      3.444300e-03  
+2    1.798010e-03      4.865890e-03  
+3    4.531910e-07      2.487530e-07  
+4    1.323950e-07      1.345120e-07  , 'convergence':              Solved Elements  Max Delta Freq. %
+Pass Number                                    
+1                       1186                NaN, 'convergence_f_pass': None}}}"

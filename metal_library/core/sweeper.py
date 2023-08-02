@@ -1,7 +1,8 @@
 from metal_library.core.librarian import QLibrarian
 from metal_library.core.sweeper_helperfunctions import extract_QSweep_parameters
-from tqdm import tqdm # creates cute progress bar
 
+from tqdm import tqdm # creates cute progress bar
+import pandas as pd
 
 class QSweeper:
     '''
@@ -66,7 +67,8 @@ class QSweeper:
         
 
         # Get all combinations of the options and values, w/ `tqdm` progress bar
-        for i, combo_parameter in tqdm(enumerate(all_combo_parameters)):
+        i = 0
+        for combo_parameter in tqdm(all_combo_parameters):
             # Update QComponent referenced by 'component_name'
             component.options = self.update_qcomponent(component.options, combo_parameter)
             design.rebuild()
@@ -83,13 +85,19 @@ class QSweeper:
             newest_simulation = self.librarian.simulations.tail(n=1)
             
             if i == 0:
-                header_qoption = self.librarian.qoptions.head(n=1)
-                header_simulation = self.librarian.simulation.head(n=1)
+                header_qoption = self.librarian.qoptions.columns.to_list()
+                header_simulation = self.librarian.simulation.columns.to_list()
+
+                header_qoption = pd.DataFrame(header_qoption, columns=header_qoption)
+                header_simulation = pd.DataFrame(header_simulation, columns=header_simulation)
                 QLibrarian.append_csv(header_qoption, header_simulation, filepath = save_path)
+            
             QLibrarian.append_csv(newest_qoption, newest_simulation, filepath = save_path)
 
             # Tell me this iteration is finished
             print('Simulated and logged configuration: {}'.format(combo_parameter))
+
+            i += 1
 
         return self.librarian
 
