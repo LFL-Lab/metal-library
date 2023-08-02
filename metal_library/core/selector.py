@@ -19,7 +19,7 @@ class Selector:
         
         if isinstance(reader, Reader):
             self.reader = reader
-            self._parse_reader(reader)
+            self._parse_reader(reader) # Assigns: self.component_type, self.geometry, self.characteristic
         else:
             raise TypeError("`reader` must be `metal_library.Reader`")
     
