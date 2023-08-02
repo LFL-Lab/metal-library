@@ -45,7 +45,19 @@
                 "column_name": "Coupling_Strength_MHz",
                 "blurb": "Coupling between qubit and cavity (Linear MHz)",
                 "units": "MHz",
-                "latex_symbol": "g_{q,c}"
+                "latex_symbo,l": "g_{q,c}"
+            },
+            {
+                "column_name": "wavelength",
+                "blurb": "Lambda/2 vs Lambda/4 wavelength of cavity.",
+                "units": "str",
+                "latex_symbo,l": ""
+            },
+            {
+                "column_name": "feedline_coupling",
+                "blurb": "Capacitive vs Inductive coupling",
+                "units": "str",
+                "latex_symbo,l": ""
             }
         ]
        },

@@ -2,6 +2,7 @@
 
 import os
 
+
 """Metal Library"""
 __version__ = '0'
 __license__ = "MIT License"
@@ -15,6 +16,9 @@ supported_components = [
     "TransmonCross",
     "TransmonPocket"
 ]
+
+import logging
+logging.basicConfig(level=logging.INFO)
 
 from addict import Dict
 

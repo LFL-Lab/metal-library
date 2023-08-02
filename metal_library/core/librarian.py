@@ -22,34 +22,9 @@ class QLibrarian:
         self.qoptions = pd.DataFrame()
         self.simulations = pd.DataFrame()
         self.analysis_setup = pd.DataFrame()
-
-
-    #### Section 1: Using your data to do things!
-    def find_best_match(self, target_parameters: dict):
-        """
-        TODO:
-        Fix row['geometry'], I want it to give me all the qcomponent.options
-
-        Finds the geometry that best matches the target parameters.
-
-        Input:
-        * target_parameters (dict) - which maps parameter names (str) to target values (float).
-        
-        """
-        best_match = None
-        min_error = float('inf')
-        for i, row in self.simulations.iterrows():
-            error = 0
-            for param, target_value in target_parameters.items():
-                if param in self.simulations.columns:
-                    error += (row[param] - target_value)**2
-            if error < min_error:
-                min_error = error
-                best_match = row['geometry']
-        return best_match
     
 
-    #### Section 2: Gathering data 
+    #### Section 1: Helps gather data 
     # Append qcomponent.options to self.qoptions
     def from_dict(self, dictionary, target_df):
         '''
@@ -73,7 +48,7 @@ class QLibrarian:
             keys, values = QLibrarian.extract_keysvalues(dictionary)
             self.qoptions = self.qoptions.append(dict(zip(keys, values)), ignore_index=True)
         elif (target_df == 'multi_qoption'):
-            self.qoptions = self.qoptions.append(dictionary, ignore_index=True)
+            raise NotImplementedError('`multi_options` is not implemented.')
         elif (target_df == 'simulation'):
             self.simulations = self.simulations.append(dictionary, ignore_index=True)
         else:
@@ -129,26 +104,8 @@ class QLibrarian:
             d[parts[-1]] = value
         return data
 
-    
-    #### Section 3: Import Data
-    def read_csv(self, filepath):
-        '''
-        Read in a .csv and split it into self.qoptions and self.simulations
-        '''
-        # Read the combined DataFrame from the CSV file
-        combined_df = pd.read_csv(filepath)
-        
-        # Split the combined DataFrame into the two separate DataFrames
-        try:
-            self.qoptions = combined_df.iloc[:, :combined_df.columns.get_loc('__SPLITTER__')]
-            self.simulations = combined_df.iloc[:, combined_df.columns.get_loc('__SPLITTER__')+1:]
-        except KeyError:
-            print("""ERROR: There are no columns in your `.csv`. This error probably came from using QLibrarian.append_csv() to make a new file.
-                     Data won't be formatted properly. """)
-        return combined_df
 
-
-    ### Section 4: Export Data
+    ### Section 2: Export Data
     def _merge_supported_data(self):
         '''
         Combine all DataFrames specified by self.supported_datatypes

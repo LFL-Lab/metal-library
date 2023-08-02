@@ -37,12 +37,12 @@ class QSweeper:
         Example:
         If `parameters = {'cross_length': [1, 2], 'cross_gap': [4, 5, 6]}`, then this method will call 
         `self.analysis.()` 6 times with the following arguments:
-        1. cross_length: 1 cross_gap: 5
-        2. cross_length: 1 cross_gap: 4
-        3. cross_length: 1 cross_gap: 6
-        4. cross_length: 2 cross_gap: 4
-        5. cross_length: 2 cross_gap: 5
-        6. cross_length: 2 cross_gap: 6
+        1. {cross_length: 1, cross_gap: 5}
+        2. {cross_length: 1, cross_gap: 4}
+        3. {cross_length: 1, cross_gap: 6}
+        4. {cross_length: 2, cross_gap: 4}
+        5. {cross_length: 2, cross_gap: 5}
+        6. {cross_length: 2, cross_gap: 6}
         """
         # Clear simulations library
         self.librarian = QLibrarian()
@@ -50,6 +50,8 @@ class QSweeper:
         # Define some useful objects
         design = self.design
         component = design.components[component_name]
+
+        # Does combinitorial parameter set
         all_combo_parameters = extract_QSweep_parameters(parameters)
 
         # Slice
@@ -64,22 +66,26 @@ class QSweeper:
         
 
         # Get all combinations of the options and values, w/ `tqdm` progress bar
-        for combo_parameter in tqdm(all_combo_parameters):
+        for i, combo_parameter in tqdm(enumerate(all_combo_parameters)):
             # Update QComponent referenced by 'component_name'
             component.options = self.update_qcomponent(component.options, combo_parameter)
             design.rebuild()
 
             # Run the analysis, extract important data
-            data = run_analysis(**kwargs)
+            data = run_analysis(**kwargs) # type(data) -> dict
 
             # Log QComponent.options and data from analysis
-            self.librarian.from_dict(component.options, 'single_qoption')
-            self.librarian.from_dict(data, 'simulation')
+            self.librarian.from_dict(component.options, 'single_qoption') # geometrical options
+            self.librarian.from_dict(data, 'simulation') #
 
             # Save this data to a csv
             newest_qoption = self.librarian.qoptions.tail(n=1)
             newest_simulation = self.librarian.simulations.tail(n=1)
             
+            if i == 0:
+                header_qoption = self.librarian.qoptions.head(n=1)
+                header_simulation = self.librarian.simulation.head(n=1)
+                QLibrarian.append_csv(header_qoption, header_simulation, filepath = save_path)
             QLibrarian.append_csv(newest_qoption, newest_simulation, filepath = save_path)
 
             # Tell me this iteration is finished
